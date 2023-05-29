@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim g
     curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     npm install npm@latest -g && \
-    install-php-extensions bcmath exif gd gettext imagick intl pdo_mysql zip && \
+    install-php-extensions bcmath exif gd gettext imagick intl pdo_mysql zip mysqli && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* && \
     a2enmod rewrite
 
@@ -32,7 +32,7 @@ ARG group_id=1000
 RUN usermod -u $user_id www-data && groupmod -g $group_id www-data
 
 ## Healthcheck ##
-HEALTHCHECK CMD curl --fail http://localhost/healthcheck || exit 1
+#HEALTHCHECK CMD curl --fail http://localhost/healthcheck || exit 1
 
 ## Working Directory ##
 WORKDIR /var/www/wordpress
