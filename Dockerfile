@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim g
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* && \
     a2enmod rewrite
 
+RUN ln -s /usr/bin/node /usr/local/bin/node
+
 ## User Permissions ##
 ARG user_id=1000
 ARG group_id=1000
