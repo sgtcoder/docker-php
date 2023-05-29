@@ -12,11 +12,11 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod +x /usr/local/bin/install-php-extensions
 
 ## Install Packages and Extensions and Cleanup ##
-RUN apt-get update && apt-get install -y --no-install-recommends wget curl dpkg-dev nano vim git unzip zip && \
+RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim git && \
     curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     npm install npm@latest -g && \
-    install-php-extensions bcmath curl exif fileinfo gd gettext hash iconv imagick intl json mbstring pdo pdo_mysql readline simplexml soap xml xmlreader xmlwriter zip && \
+    install-php-extensions bcmath exif gd gettext imagick intl pdo_mysql zip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* && \
     a2enmod rewrite
 
@@ -27,3 +27,4 @@ RUN usermod -u $user_id www-data && groupmod -g $group_id www-data
 
 ## Working Directory ##
 WORKDIR /var/www/laravel
+
