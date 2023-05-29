@@ -1,3 +1,8 @@
 #!/bin/bash
+COMMIT_MESSAGE="$1"
 
-git add -A && git commit -m "Updates" && git push -u origin master
+if [[ -z "${COMMIT_MESSAGE}" ]]; then
+    COMMIT_MESSAGE="Updates - Automated Commit Message"
+fi
+
+git add -A && git commit -m "${COMMIT_MESSAGE}" && git push -u origin master
