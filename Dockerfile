@@ -28,5 +28,4 @@ ARG group_id=1000
 RUN usermod -u $user_id www-data && groupmod -g $group_id www-data
 
 ## Working Directory ##
-WORKDIR /var/www/laravel
-
+WORKDIR /var/www/wordpress
