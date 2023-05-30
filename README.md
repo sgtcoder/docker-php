@@ -1,2 +1,2 @@
-# Docker WordPress Apache
-Everything to get started with running WordPress on Apache with NodeJS and WP CLI
+# Docker Apache
+Everything to get started with running WordPress/Laravel/PHP on Apache with NodeJS and WP CLI

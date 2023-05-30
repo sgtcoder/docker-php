@@ -1,6 +1,10 @@
 ## Set our base image ##
 FROM sgtcoder/apache-base
 
+ENV PUID=1000
+ENV PGID=1000
+ENV DOCUMENT_ROOT="/var/www/html"
+
 ## WordPress CLI ##
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp && chmod +x /usr/local/bin/wp
 
@@ -8,9 +12,7 @@ RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 COPY ./configs/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 ## User Permissions ##
-ARG user_id=1000
-ARG group_id=1000
-RUN usermod -u $user_id www-data && groupmod -g $group_id www-data
+RUN usermod -u $PUID www-data && groupmod -g $PGID www-data
 
 ## Healthcheck ##
 #HEALTHCHECK CMD curl --fail http://localhost/healthcheck || exit 1
@@ -19,4 +21,4 @@ RUN usermod -u $user_id www-data && groupmod -g $group_id www-data
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 ## Working Directory ##
-WORKDIR /var/www/wordpress
+WORKDIR $DOCUMENT_ROOT
