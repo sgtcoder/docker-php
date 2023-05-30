@@ -10,12 +10,13 @@ RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 
 ## Copy Default Config ##
 COPY ./configs/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ./configs/healthcheck.conf /etc/apache2/conf-enabled/healthcheck.conf
 
 ## User Permissions ##
 RUN usermod -u $PUID www-data && groupmod -g $PGID www-data
 
 ## Healthcheck ##
-#HEALTHCHECK CMD curl --fail http://localhost/healthcheck || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:5000/healthcheck || exit 1
 
 ## Cleanup ##
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
