@@ -22,4 +22,4 @@ HEALTHCHECK CMD curl --fail http://localhost:5000/healthcheck || exit 1
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 ## Working Directory ##
-WORKDIR $DOCUMENT_ROOT
+WORKDIR ${DOCUMENT_ROOT}
