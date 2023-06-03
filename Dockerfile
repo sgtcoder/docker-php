@@ -2,7 +2,7 @@
 FROM php:8-cli
 
 ## Install Required Packages ##
-RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim git tar gnupg lsb-release automake libtool autoconf unzip
+RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim git tar gnupg lsb-release automake libtool autoconf unzip procps
 
 ## Install gpg keys ##
 RUN mkdir /etc/apt/keyrings
@@ -41,7 +41,7 @@ RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN usermod -u $PUID www-data && groupmod -g $PGID www-data
 
 ## Healthcheck ##
-#HEALTHCHECK CMD curl --fail http://localhost:5000/healthcheck || exit 1
+HEALTHCHECK CMD pgrep -f php || exit 1
 
 ## Cleanup ##
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
