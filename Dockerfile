@@ -5,7 +5,7 @@ FROM php:8-cli
 RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim git tar gnupg lsb-release automake libtool autoconf unzip procps
 
 ## Install gpg keys ##
-RUN mkdir /etc/apt/keyrings
+RUN mkdir -p /etc/apt/keyrings
 RUN wget -qO - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | tee /etc/apt/keyrings/nodesource
 
 ## Setup Repos and apt pinning ##
@@ -38,7 +38,8 @@ ENV PGID=1000
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp && chmod +x /usr/local/bin/wp
 
 ## User Permissions ##
-RUN usermod -u $PUID www-data && groupmod -g $PGID www-data
+RUN mkdir /home/www-data
+RUN usermod -u $PUID -d /home/www-data -s /bin/bash www-data && groupmod -g $PGID www-data
 
 ## Healthcheck ##
 HEALTHCHECK CMD pgrep -f php || exit 1
