@@ -9,7 +9,7 @@ RUN mkdir -p /etc/apt/keyrings
 RUN gpg --no-default-keyring --keyring /etc/apt/keyrings/nodesource.gpg --recv-keys 1655A0AB68576280
 
 ## Setup Repos and apt pinning ##
-RUN "deb [arch=amd64 signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x $(lsb_release -sc) main" > /etc/apt/sources.list.d/nodesource.list
+RUN "deb [arch=amd64 signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x buster main" > /etc/apt/sources.list.d/nodesource.list
 
 ## Install PHP Extension Installer ##
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
