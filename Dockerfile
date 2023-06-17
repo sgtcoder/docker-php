@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim g
 
 ## Install gpg keys ##
 RUN mkdir -p /etc/apt/keyrings
-RUN gpg --no-default-keyring --keyring /etc/apt/keyrings/nodesource.gpg --recv-keys 1655A0AB68576280
+RUN gpg --no-default-keyring --keyring /etc/apt/keyrings/nodesource.gpg --recv-keys --keyserver hkp://keyserver.ubuntu.com 1655A0AB68576280
 
 ## Setup Repos and apt pinning ##
 RUN echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x $(lsb_release -sc) main" > /etc/apt/sources.list.d/nodesource.list
