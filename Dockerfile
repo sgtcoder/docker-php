@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim g
 ## Install gpg keys ##
 RUN mkdir -p /root/.gnupg && chmod 700 /root/.gnupg
 RUN mkdir -p /etc/apt/keyrings && install -m 0755 -d /etc/apt/keyrings
-RUN gpg --no-default-keyring --keyring /etc/apt/keyrings/nodesource.gpg --recv-keys --keyserver hkp://keyserver.ubuntu.com 1655A0AB68576280
+RUN gpg --no-default-keyring --keyring /etc/apt/keyrings/nodesource.gpg --recv-keys --keyserver keys.gnupg.net 1655A0AB68576280
 RUN chown _apt /etc/apt/keyrings/*.gpg
 
 ## Setup Repos and apt pinning ##
