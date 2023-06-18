@@ -2,7 +2,7 @@
 FROM php:8-cli
 
 ## Install Required Packages ##
-RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim git tar gnupg lsb-release automake libtool autoconf unzip procps
+RUN apt-get update && apt-get install -y --no-install-recommends wget nano vim git tar gnupg lsb-release automake libtool autoconf unzip procps jq
 
 ## Install gpg keys ##
 RUN mkdir -p /root/.gnupg && chmod 700 /root/.gnupg
